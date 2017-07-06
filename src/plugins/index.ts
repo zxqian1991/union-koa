@@ -36,7 +36,7 @@ export class UnionPlugins {
                             .module(ctx, async function () {
                                 index++;
                                 await walk();
-                            });
+                            },me.app);
                         index++;
                         await walk();
                     }
