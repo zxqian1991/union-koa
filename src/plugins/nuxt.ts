@@ -2,7 +2,7 @@ const Nuxt = require("nuxt");
 import * as Koa from "koa";
 export function nuxtPlugin(config : any) {
     let nuxt : any;
-    return async function (ctx : Koa.Context, next : Function) {
+    return async function (ctx : Koa.Context, next : Function,app:Koa) {
         if (!nuxt) {
             nuxt = await new Nuxt(config);
             if (config.dev) {

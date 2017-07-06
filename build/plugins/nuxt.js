@@ -38,7 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Nuxt = require("nuxt");
 function nuxtPlugin(config) {
     var nuxt;
-    return function (ctx, next) {
+    return function (ctx, next, app) {
         return __awaiter(this, void 0, void 0, function () {
             var e_1;
             return __generator(this, function (_a) {

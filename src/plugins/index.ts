@@ -44,7 +44,7 @@ export class UnionPlugins {
                 await walk();
                 await plugin.module(ctx, async function () {
                     await next();
-                });
+                },me.app);
             });
     }
     private plugins : UnionPluginConfig[] = [];

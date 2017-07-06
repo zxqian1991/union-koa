@@ -87,7 +87,7 @@ var UnionPlugins = (function () {
                                                     }
                                                 });
                                             });
-                                        })];
+                                        }, me.app)];
                                 case 1:
                                     _a.sent();
                                     index++;
@@ -119,7 +119,7 @@ var UnionPlugins = (function () {
                                             }
                                         });
                                     });
-                                })];
+                                }, me.app)];
                         case 2:
                             _a.sent();
                             return [2 /*return*/];
