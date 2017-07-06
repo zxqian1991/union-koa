@@ -1,0 +1,1 @@
+declare function asynct(): Promise<{}>;
