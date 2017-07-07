@@ -18,6 +18,10 @@ class UnionPlugins {
         me
             .plugins
             .forEach((plugin) => {
+            if (typeof plugin == "function") {
+                plugin = plugin(me.app);
+            }
+            ;
             if (!plugin.before || !(plugin.before instanceof Array)) {
                 plugin.before = [];
             }
