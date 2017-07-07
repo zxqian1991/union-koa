@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var os = require("os");
-var ifaces = os.networkInterfaces();
-var iptable = {};
-var _loop_1 = function (dev) {
+const os = require("os");
+let ifaces = os.networkInterfaces();
+let iptable = {};
+for (let dev in ifaces) {
     ifaces[dev]
         .forEach(function (details, alias) {
         if (details.family == 'IPv4') {
@@ -12,9 +12,6 @@ var _loop_1 = function (dev) {
                 : '')] = details.address;
         }
     });
-};
-for (var dev in ifaces) {
-    _loop_1(dev);
 }
 ;
 console.log(iptable);

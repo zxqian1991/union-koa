@@ -7,9 +7,9 @@ import { UnionPlugins } from './plugins/index';
 export declare class UnionApp {
     constructor(config: UnionAppConfig | string);
     logger: UnionLog;
-    app: Koa;
+    koa: Koa;
     config: UnionAppConfig;
     plugins: UnionPlugins;
-    initConfig(config: any): Promise<void>;
-    initApp(): Promise<void>;
+    private initConfig(config);
+    private initApp();
 }
