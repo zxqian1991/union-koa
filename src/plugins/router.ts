@@ -80,7 +80,7 @@ export function routerPlugin(config : UnionRouterConfig) {
         let arr: string[]= url.match(reg);
         let data: string[] = [];
         let key = null;
-        while(arr.length > 0) {
+        while(arr && arr.length > 0) {
             let _u = "/" + arr.join("/");
             if(mapping.hasOwnProperty(_u)) {
                 key = _u;
