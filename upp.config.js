@@ -1,6 +1,6 @@
 const path = require("path");
 const nuxtPlugin = require("./build/plugins/nuxt").nuxtPlugin;
-const routerPlugin = require("./build/plugins/router").routerPlugin;
+const routerPlugin = require("./build/plugins/_router").UnionRouterPlugin;
 module.exports = {
     port: 11342,
     logger: {
@@ -12,9 +12,14 @@ module.exports = {
         }
     },
     plugins: [{
+        name: "test",
+        module: async function(ctx, next) {
+            await next();
+        }
+    }, {
         name: "router",
         module: routerPlugin({
-            src: "router"
+            src: "routers"
         }),
         level: 0
     }, {

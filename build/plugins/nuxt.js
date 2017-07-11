@@ -18,7 +18,7 @@ function nuxtPlugin(config) {
             ;
         }
         ;
-        ctx.status = 200; // koa defaults to 404 when it sees that status is unset
+        ctx.status = 200; // koa defaults to 404 when it sees that status is unsets
         await nuxt.render(ctx.req, ctx.res);
     };
 }

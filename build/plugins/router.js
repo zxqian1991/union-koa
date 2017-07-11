@@ -71,8 +71,6 @@ function routerPlugin(config) {
     parseRouter().then(() => {
         stat = true;
         emitter.emit("end");
-        console.log(mapping);
-        ;
     });
     function beautyPath(path) {
         return path.replace(/\/$/gi, '');

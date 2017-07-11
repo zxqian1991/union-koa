@@ -67,7 +67,6 @@ export function routerPlugin(config : UnionRouterConfig) {
     parseRouter().then(()=>{
         stat = true;
         emitter.emit("end");
-        console.log(mapping);;
     });
     function beautyPath(path:string){
         return path.replace(/\/$/gi,'')
