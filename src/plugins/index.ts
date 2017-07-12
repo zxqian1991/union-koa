@@ -1,8 +1,8 @@
 import * as Koa from 'koa';
 import * as UnionArray from 'union-util/array';
-import { find, FindPExtraValue } from 'union-util/array';
-import { order } from 'union-util/sort';
-import { UnionApp } from '../index';
+import {find, FindPExtraValue} from 'union-util/array';
+import {order} from 'union-util/sort';
+import {UnionApp} from '../index';
 export class UnionPlugins {
     constructor(config : UnionPluginConfig[], app : UnionApp) {
         let me = this;
@@ -10,7 +10,7 @@ export class UnionPlugins {
         me.app = app;
         me.init();
     };
-    app:UnionApp;
+    app : UnionApp;
     private init() {
         let me = this;
         // 进行一次排序
@@ -20,12 +20,18 @@ export class UnionPlugins {
             .koa
             .use(async(ctx : Koa.Context, next : Function) => {
                 let i = 0;
-                async function exec(){
-                    if(i < me.plugins.length) {
-                        await me.plugins[i].module(ctx,async function(){
+                async function exec() {
+                    if (i < me.plugins.length) {
+                        if (me.plugins[i].enable == undefined || !me.plugins[i].enable) {
+                            // 不允许的时候 直接越过
                             ++i;
                             await exec();
-                        },me.app);
+                        } else {
+                            await me.plugins[i].module(ctx, async function () {
+                                    ++i;
+                                    await exec();
+                                }, me.app);
+                        }
                     }
                 };
                 await exec();
@@ -47,5 +53,6 @@ export interface UnionPluginConfig {
         : number;
     name : string;
     module : any;
+    enable?: boolean;
 };
 // export interfacee

@@ -21,10 +21,17 @@ class UnionPlugins {
             let i = 0;
             async function exec() {
                 if (i < me.plugins.length) {
-                    await me.plugins[i].module(ctx, async function () {
+                    if (me.plugins[i].enable == undefined || !me.plugins[i].enable) {
+                        // 不允许的时候 直接越过
                         ++i;
                         await exec();
-                    }, me.app);
+                    }
+                    else {
+                        await me.plugins[i].module(ctx, async function () {
+                            ++i;
+                            await exec();
+                        }, me.app);
+                    }
                 }
             }
             ;

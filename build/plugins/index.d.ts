@@ -10,4 +10,5 @@ export interface UnionPluginConfig {
     level?: number;
     name: string;
     module: any;
+    enable?: boolean;
 }
