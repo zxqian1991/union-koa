@@ -1,10 +1,12 @@
+
 import * as Koa from "koa";
 import * as path from "path";
 import * as fs from "fs";
-import {EventEmitter} from "events";
-import {deep} from "union-util/merge";
-import {walk} from "union-util/file"
-import {join} from "union-util/array";
+import { EventEmitter } from 'events';
+import { join } from 'union-util/array';
+import { walk } from 'union-util/file';
+import { deep } from 'union-util/merge';
+import { UnionApp } from '../index';
 export function UnionRouterPlugin(config : UnionRouterPluginConfig) {
     const defaultUnionRouterPlugin : UnionRouterPluginConfig = {
         src: path.resolve("build/routers")
@@ -92,7 +94,6 @@ export function UnionRouterPlugin(config : UnionRouterPluginConfig) {
                         let _str = join(arr, "/", j, arr.length - 1);
                         if (tmp.hasOwnProperty(_str)) {
                             let $key = "$" + (j - i - 1);
-                            console.log('asdasd:',$key,i,j);;
                             if(tmp[_str].hasOwnProperty($key)) {
                                 res = tmp[_str][$key];
                             }
@@ -130,23 +131,21 @@ export function UnionRouterPlugin(config : UnionRouterPluginConfig) {
         parseFile(filename, pre);
     }).then(() => {
         hasInited = true;
-        console.log(mapping);
         event.emit("end");
     })
-    return async function (ctx : Koa.Context, next : Function) {
+    return async function (ctx : Koa.Context, next : Function,app:UnionApp) {
         if (!hasInited) {
             await wait();
         };
         let value : UnionRouterFormatValue = getValue(ctx);
         if (value) {
-            console.log(value);
             if (value.method && value.method.toUpperCase() != ctx.method.toUpperCase()) {
                 await next();
             } else {
                 let handler = require(value.path);
                 await handler(ctx, async function () {
                     await next();
-                }, value.data);
+                }, value.data,app);
             }
         } else {
             await next();

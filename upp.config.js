@@ -7,7 +7,7 @@ module.exports = {
         root: path.join(__dirname, "logs"),
         loggers: {
             "qianzhixiang": {
-                filename: "qianzhiasasxiang.log"
+                filename: "qianzhixiang.log"
             }
         }
     },

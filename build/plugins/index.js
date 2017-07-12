@@ -16,6 +16,7 @@ class UnionPlugins {
         me.order();
         me
             .app
+            .koa
             .use(async (ctx, next) => {
             let i = 0;
             async function exec() {
@@ -23,7 +24,7 @@ class UnionPlugins {
                     await me.plugins[i].module(ctx, async function () {
                         ++i;
                         await exec();
-                    });
+                    }, me.app);
                 }
             }
             ;

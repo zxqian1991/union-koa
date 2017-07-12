@@ -156,31 +156,37 @@ class UnionSingleLogger {
     trace(content, type = 0) {
         let me = this;
         me.log("trace", content, type);
+        return me;
     }
     ;
     debug(content, type = 0) {
         let me = this;
         me.log("debug", content, type);
+        return me;
     }
     ;
     info(content, type = 0) {
         let me = this;
         me.log("info", content, type);
+        return me;
     }
     ;
     warn(content, type = 0) {
         let me = this;
         me.log("warn", content, type);
+        return me;
     }
     ;
     error(content, type = 0) {
         let me = this;
         me.log("error", content, type);
+        return me;
     }
     ;
     fatal(content, type = 0) {
         let me = this;
         me.log("fatal", content, type);
+        return me;
     }
     ;
 }

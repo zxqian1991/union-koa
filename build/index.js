@@ -36,7 +36,7 @@ class UnionApp {
     // 初始化app
     async initApp() {
         let me = this;
-        me.plugins = new index_1.UnionPlugins(me.config.plugins, me.koa);
+        me.plugins = new index_1.UnionPlugins(me.config.plugins, me);
     }
 }
 exports.UnionApp = UnionApp;

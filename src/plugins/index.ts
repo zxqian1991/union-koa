@@ -1,21 +1,23 @@
 import * as Koa from 'koa';
 import * as UnionArray from 'union-util/array';
-import {order} from 'union-util/sort';
-import {FindPExtraValue, find} from 'union-util/array';
+import { find, FindPExtraValue } from 'union-util/array';
+import { order } from 'union-util/sort';
+import { UnionApp } from '../index';
 export class UnionPlugins {
-    constructor(config : UnionPluginConfig[], app : Koa) {
+    constructor(config : UnionPluginConfig[], app : UnionApp) {
         let me = this;
         me.plugins = config;
         me.app = app;
         me.init();
     };
-    app : Koa;
+    app:UnionApp;
     private init() {
         let me = this;
         // 进行一次排序
         me.order();
         me
             .app
+            .koa
             .use(async(ctx : Koa.Context, next : Function) => {
                 let i = 0;
                 async function exec(){
@@ -23,7 +25,7 @@ export class UnionPlugins {
                         await me.plugins[i].module(ctx,async function(){
                             ++i;
                             await exec();
-                        })
+                        },me.app);
                     }
                 };
                 await exec();

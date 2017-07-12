@@ -1,6 +1,7 @@
 /// <reference types="koa" />
 import * as Koa from "koa";
-export declare function UnionRouterPlugin(config: UnionRouterPluginConfig): (ctx: Koa.Context, next: Function) => Promise<void>;
+import { UnionApp } from '../index';
+export declare function UnionRouterPlugin(config: UnionRouterPluginConfig): (ctx: Koa.Context, next: Function, app: UnionApp) => Promise<void>;
 export interface UnionRouterPluginConfig {
     src?: string;
 }

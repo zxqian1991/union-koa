@@ -1,8 +1,7 @@
-/// <reference types="koa" />
-import * as Koa from 'koa';
+import { UnionApp } from '../index';
 export declare class UnionPlugins {
-    constructor(config: UnionPluginConfig[], app: Koa);
-    app: Koa;
+    constructor(config: UnionPluginConfig[], app: UnionApp);
+    app: UnionApp;
     private init();
     private plugins;
     private order(ifasync?);

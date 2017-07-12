@@ -17,12 +17,12 @@ export declare class UnionSingleLogger {
     constructor(name: string);
     private name;
     private log(logtype, content, outtype?);
-    trace(content: string, type?: number): void;
-    debug(content: string, type?: number): void;
-    info(content: string, type?: number): void;
-    warn(content: string, type?: number): void;
-    error(content: string, type?: number): void;
-    fatal(content: string, type?: number): void;
+    trace(content: string, type?: number): this;
+    debug(content: string, type?: number): this;
+    info(content: string, type?: number): this;
+    warn(content: string, type?: number): this;
+    error(content: string, type?: number): this;
+    fatal(content: string, type?: number): this;
 }
 export interface UnionLogConfig {
     root: string;

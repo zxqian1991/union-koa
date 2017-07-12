@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
 const events_1 = require("events");
-const merge_1 = require("union-util/merge");
-const file_1 = require("union-util/file");
 const array_1 = require("union-util/array");
+const file_1 = require("union-util/file");
+const merge_1 = require("union-util/merge");
 function UnionRouterPlugin(config) {
     const defaultUnionRouterPlugin = {
         src: path.resolve("build/routers")
@@ -85,8 +85,6 @@ function UnionRouterPlugin(config) {
                         let _str = array_1.join(arr, "/", j, arr.length - 1);
                         if (tmp.hasOwnProperty(_str)) {
                             let $key = "$" + (j - i - 1);
-                            console.log('asdasd:', $key, i, j);
-                            ;
                             if (tmp[_str].hasOwnProperty($key)) {
                                 res = tmp[_str][$key];
                             }
@@ -127,17 +125,15 @@ function UnionRouterPlugin(config) {
         parseFile(filename, pre);
     }).then(() => {
         hasInited = true;
-        console.log(mapping);
         event.emit("end");
     });
-    return async function (ctx, next) {
+    return async function (ctx, next, app) {
         if (!hasInited) {
             await wait();
         }
         ;
         let value = getValue(ctx);
         if (value) {
-            console.log(value);
             if (value.method && value.method.toUpperCase() != ctx.method.toUpperCase()) {
                 await next();
             }
@@ -145,7 +141,7 @@ function UnionRouterPlugin(config) {
                 let handler = require(value.path);
                 await handler(ctx, async function () {
                     await next();
-                }, value.data);
+                }, value.data, app);
             }
         }
         else {
