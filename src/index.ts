@@ -9,16 +9,13 @@ import { getBeautyStrOfIp } from 'union-util/interface';
 import { deep } from 'union-util//merge';
 import { UnionPlugins } from './plugins/index';
 export class UnionApp {
-    constructor(config : UnionAppConfig | string) {
+    constructor(config : UnionAppConfig | string | Function) {
         let me = this;
-        if(!config || typeof config == "string") {
-            config = require(getFullPath((config as string) || "upp.config.js"))
-        };
+        me.koa = new Koa();        
         me.initConfig(config).then(async ()=>{
             me.logger = new UnionLog(me.config.logger);
             me.logger.info(`正在启动程序请稍后...`.blue);
             process.env.PORT = me.config.port.toString();
-            me.koa = new Koa();
             await me.initApp();
             me.koa.listen(me.config.port);
             me.logger.info(`程序已启动,请访问${getBeautyStrOfIp(me.config.port)}`.cyan);
@@ -32,6 +29,12 @@ export class UnionApp {
     // 初始化配置
     private async initConfig(config:any){
         let me = this;
+        if(!config || typeof config == "string") {
+            config = require(getFullPath((config as string) || "upp.config.js"))
+        };
+        if(typeof config == "function") {
+            config = await config(me.koa);
+        };
         me.config = deep(defaultConfig,config);
     };
     // 初始化app

@@ -5,7 +5,7 @@ import UnionLog from "./logger";
 import { UnionAppConfig } from './default.config';
 import { UnionPlugins } from './plugins/index';
 export declare class UnionApp {
-    constructor(config: UnionAppConfig | string);
+    constructor(config: UnionAppConfig | string | Function);
     logger: UnionLog;
     koa: Koa;
     config: UnionAppConfig;
