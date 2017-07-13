@@ -1,18 +1,42 @@
 <template>
-  <section class="container">
-    <h1 class="title">
-      Universal Vue.js Aspplication Frameworks
-    </h1>
-    <nuxt-link class="button" to="/about">
-      About page
-    </nuxt-link>
-  </section>
+    <section class="container">
+        <Button type="primary" @click="info">显示普通提醒</Button>
+        <Button type="primary" @click="modal1 = true">显示对话框</Button>
+        <Modal v-model="modal1" title="普通的Modal对话框标题" @on-ok="ok" @on-cancel="cancel">
+            <p>对话框内容</p>
+            <p>对话框内容</p>
+            <p>对话框内容</p>
+        </Modal>
+        <h1 class="title">
+            Universal Vue.js Aspplication Frameworks
+        </h1>
+        <nuxt-link class="button" to="/about">
+            About page
+        </nuxt-link>
+    </section>
 </template>
 <script>
+export default {
+    methods: {
+        info() {
+            this.$Message.info('这是一条普通的提醒');
+        },
+        ok() {
+            this.$Message.info('点击了确定');
+        },
+        cancel() {
+            this.$Message.info('点击了取消');
+        }
+    },
+    data() {
+        return {
+            modal1: false
+        }
+    }
+}
 </script>
 <style scoped>
-.title
-{
-  margin: 50px 0;
+.title {
+    margin: 50px 0;
 }
 </style>
