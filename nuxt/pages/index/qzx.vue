@@ -1,6 +1,6 @@
 <template>
     <section class="container">
-        <!-- <Button type="primary" @click="info">显示普通提醒</Button>
+        <Button type="primary" @click="info">显示普通提醒</Button>
         <Button type="primary" @click="modal1 = true">显示对话框</Button>
         <Modal v-model="modal1" title="普通的Modal对话框标题" @on-ok="ok" @on-cancel="cancel">
             <p>对话框内容</p>
@@ -12,16 +12,7 @@
         </h1>
         <nuxt-link class="button" to="/about">
             About page
-        </nuxt-link> -->
-        <Button type="primary">
-            <nuxt-link to="/qzx" style="color:white">
-                显示对话框    
-            </nuxt-link>
-        </Button>
-
-        <h2>aslmaslkdlaskmdlkamsdlkm</h2>
-        
-        <nuxt-child/>
+        </nuxt-link>
     </section>
 </template>
 <script>
