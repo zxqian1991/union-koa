@@ -8,27 +8,29 @@ module.exports = {
         root: path.join(__dirname, "logs"),
         loggers: {
             "qianzhixiang": {
-                filename: "qianzhixiang.log"
+                filename: "qianzhixiang"
             }
         }
     },
     plugins: [{
-        name: "logger",
-        module: logger(),
-        level: 0,
-        enable: true
+            name: "logger",
+            module: logger(),
+            level: 0,
+            enable: true
 
-    }, {
-        name: "router",
-        module: routerPlugin({
-            src: "build/routers"
-        }),
-        level: 0,
-        enable: true
-    }, {
-        name: "nuxt",
-        module: nuxtPlugin(require("./nuxt.config")),
-        level: 1,
-        enable: true
-    }]
+        }, {
+            name: "router",
+            module: routerPlugin({
+                src: "build/routers"
+            }),
+            level: 0,
+            enable: true
+        },
+        {
+            name: "nuxt",
+            module: nuxtPlugin(require("./nuxt.config")),
+            level: 1,
+            enable: false
+        }
+    ]
 };
