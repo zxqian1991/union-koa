@@ -1,6 +1,6 @@
 const path = require("path");
 module.exports = {
-    srcDir: path.join(__dirname, "./nuxt"),
+    srcDir: path.join(__dirname, "./src/nuxt"),
     cache: true,
     dev: process.env.NODE_ENV != "production",
     css: [
@@ -10,6 +10,9 @@ module.exports = {
         src: "~plugins/iview",
         ssr: true
     }],
+    performance: {
+
+    },
     build: {
         vender: [
             "axios",
@@ -31,6 +34,13 @@ module.exports = {
                     name: 'fonts/[name].[hash:7].[ext]'
                 }
             }
-        ]
+        ],
+        extend(config) {
+            for (rule of config.module.rules) {
+                if (rule.loader === 'vue-loader') {
+                    rule.query.loaders.ts = 'ts-loader?{"appendTsSuffixTo":["\\\\.vue$"],"compilerOptions":{"target": "es5","allowSyntheticDefaultImports": true}}'
+                }
+            }
+        }
     }
 };

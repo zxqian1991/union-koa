@@ -1,6 +1,6 @@
 <template>
     <section class="container">
-        <!-- <Button type="primary" @click="info">显示普通提醒</Button>
+        <Button type="primary" @click="info">显示普通提醒</Button>
         <Button type="primary" @click="modal1 = true">显示对话框</Button>
         <Modal v-model="modal1" title="普通的Modal对话框标题" @on-ok="ok" @on-cancel="cancel">
             <p>对话框内容</p>
@@ -10,22 +10,17 @@
         <h1 class="title">
             Universal Vue.js Aspplication Frameworks
         </h1>
-        <nuxt-link class="button" to="/about">
-            About page
-        </nuxt-link> -->
-        <Button type="primary">
-            <nuxt-link to="/qzx" style="color:white">
-                显示对话框    
-            </nuxt-link>
-        </Button>
-
-        <h2>aslmaslkdlaskmdlkamsdlkm</h2>
-        
-        <nuxt-child/>
     </section>
 </template>
-<script>
-export default {
+<script lang="ts">
+import Vue,{ComponentOptions} from "vue";
+import iviewtype from "../../util/types/iview";
+let index: ComponentOptions<iviewtype> = {
+    data() {
+        return {
+            modal1: false
+        }
+    },
     methods: {
         info() {
             this.$Message.info('这是一条普通的提醒');
@@ -36,13 +31,9 @@ export default {
         cancel() {
             this.$Message.info('点击了取消');
         }
-    },
-    data() {
-        return {
-            modal1: false
-        }
     }
-}
+};
+export default index;
 </script>
 <style scoped>
 .title {
